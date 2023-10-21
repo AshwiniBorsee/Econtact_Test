@@ -6,7 +6,7 @@ using System.Windows.Forms;
 
 namespace Econtact
 {
-    static class Program
+    public class Program
     {
         /// <summary>
         /// The main entry point for the application.
@@ -17,6 +17,10 @@ namespace Econtact
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Econtact());
+        }
+        public static void print()
+        {
+            Console.WriteLine("Hello, I am here");
         }
     }
 }

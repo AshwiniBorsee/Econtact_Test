@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33927.135
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Econtact", "Econtact\Econtact.csproj", "{72AAF5DB-0927-4376-958F-4721DF16615D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTestProject1", "UnitTestProject1\UnitTestProject1.csproj", "{9720C44C-E6E1-4AAA-AF1B-D57E78ACCAAB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,8 +17,15 @@ Global
 		{72AAF5DB-0927-4376-958F-4721DF16615D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{72AAF5DB-0927-4376-958F-4721DF16615D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{72AAF5DB-0927-4376-958F-4721DF16615D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9720C44C-E6E1-4AAA-AF1B-D57E78ACCAAB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9720C44C-E6E1-4AAA-AF1B-D57E78ACCAAB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9720C44C-E6E1-4AAA-AF1B-D57E78ACCAAB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9720C44C-E6E1-4AAA-AF1B-D57E78ACCAAB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {61DE1739-9FA1-4757-B335-06A35ECB6254}
 	EndGlobalSection
 EndGlobal
