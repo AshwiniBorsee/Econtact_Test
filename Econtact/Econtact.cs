@@ -13,19 +13,25 @@ using System.Windows.Forms;
 
 namespace Econtact
 {
-    public partial class Econtact : Form
+    public partial class Econtactcls : Form
     {
-        public Econtact()
+        public contactClass c = new contactClass();
+        public Econtactcls()
         {
             InitializeComponent();
+
         }
-        contactClass c = new contactClass();
+       // c = new contactClass();
         public void textBox1_TextChanged(object sender, EventArgs e)
         {
 
         }
+        private void btnAdd_Click(object sender, EventArgs e)
+        {
+            add_Contact();
+        }
 
-        public void btnAdd_Click(object sender, EventArgs e)
+        public void add_Contact()
         {
             //Get the value from the input fields
             c.FirstName = txtboxFirstName.Text;
@@ -75,10 +81,14 @@ namespace Econtact
             txtboxContactID.Text = "";
         }
 
-        public void btnUpdate_Click(object sender, EventArgs e)
+        private void btnUpdate_Click(object sender, EventArgs e)
+        {
+            update_Contact();
+        }
+        public void update_Contact()
         {
             //Get the Data from textboxes
-            c.ContactID = int.Parse(txtboxContactID.Text);
+            c.ContactID = 1;//int.Parse(txtboxContactID.Text);
             c.FirstName = txtboxFirstName.Text;
             c.LastName = txtboxLastName.Text;
             c.ContactNo = txtBoxContactNumber.Text;
@@ -122,7 +132,11 @@ namespace Econtact
             Clear();
         }
 
-        public void btnDelete_Click(object sender, EventArgs e)
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            delete_Contact();
+        }
+        public void delete_Contact()
         {
             //Get the Contact ID fromt eh Application
             c.ContactID = Convert.ToInt32(txtboxContactID.Text);
@@ -144,7 +158,7 @@ namespace Econtact
                 MessageBox.Show("Failed to Delete Dontact. Try Again.");
             }
         }
-        static string myconnstr = ConfigurationManager.ConnectionStrings["connstrng"].ConnectionString;
+        string myconnstr = "Data Source=CIRRUS\\VIJAY;Initial Catalog=Econtact;Integrated Security=True;";//ConfigurationManager.ConnectionStrings["connstrng"].ConnectionString;
         public void txtboxSearch_TextChanged(object sender, EventArgs e)
         {
             //Get teh value from text box

@@ -1,6 +1,6 @@
 ﻿namespace Econtact
 {
-    partial class Econtact
+    partial class Econtactcls
     {
         /// <summary>
         /// Required designer variable.
@@ -26,9 +26,9 @@
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
-        private void InitializeComponent()
+        public void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Econtact));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Econtactcls));
             this.pictureBoxLogo = new System.Windows.Forms.PictureBox();
             this.lblContactID = new System.Windows.Forms.Label();
             this.txtboxContactID = new System.Windows.Forms.TextBox();
@@ -320,27 +320,27 @@
 
         #endregion
 
-        private System.Windows.Forms.PictureBox pictureBoxLogo;
-        private System.Windows.Forms.Label lblContactID;
-        private System.Windows.Forms.TextBox txtboxContactID;
-        private System.Windows.Forms.TextBox txtboxLastName;
-        private System.Windows.Forms.Label lblLastName;
-        private System.Windows.Forms.TextBox txtBoxContactNumber;
-        private System.Windows.Forms.Label lblContactNumber;
-        private System.Windows.Forms.TextBox txtboxFirstName;
-        private System.Windows.Forms.Label lblFirstName;
-        private System.Windows.Forms.TextBox txtBoxAddress;
-        private System.Windows.Forms.Label lblAddress;
-        private System.Windows.Forms.ComboBox cmbGender;
-        private System.Windows.Forms.Label lblGender;
-        private System.Windows.Forms.Button btnAdd;
-        private System.Windows.Forms.Button btnUpdate;
-        private System.Windows.Forms.Button btnClear;
-        private System.Windows.Forms.Button btnDelete;
-        private System.Windows.Forms.DataGridView dgvContactList;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox txtboxSearch;
-        private System.Windows.Forms.PictureBox pictureBox1;
+        public System.Windows.Forms.PictureBox pictureBoxLogo;
+        public System.Windows.Forms.Label lblContactID;
+        public System.Windows.Forms.TextBox txtboxContactID;
+        public System.Windows.Forms.TextBox txtboxLastName;
+        public System.Windows.Forms.Label lblLastName;
+        public System.Windows.Forms.TextBox txtBoxContactNumber;
+        public System.Windows.Forms.Label lblContactNumber;
+        public System.Windows.Forms.TextBox txtboxFirstName;
+        public System.Windows.Forms.Label lblFirstName;
+        public System.Windows.Forms.TextBox txtBoxAddress;
+        public System.Windows.Forms.Label lblAddress;
+        public System.Windows.Forms.ComboBox cmbGender;
+        public System.Windows.Forms.Label lblGender;
+        public System.Windows.Forms.Button btnAdd;
+        public System.Windows.Forms.Button btnUpdate;
+        public System.Windows.Forms.Button btnClear;
+        public System.Windows.Forms.Button btnDelete;
+        public System.Windows.Forms.DataGridView dgvContactList;
+        public System.Windows.Forms.Label label1;
+        public System.Windows.Forms.TextBox txtboxSearch;
+        public System.Windows.Forms.PictureBox pictureBox1;
     }
 }
 

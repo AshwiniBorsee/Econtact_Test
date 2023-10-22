@@ -16,7 +16,7 @@ namespace Econtact
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Econtact());
+            Application.Run(new Econtactcls());
         }
         public static void print()
         {

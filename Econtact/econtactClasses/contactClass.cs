@@ -6,10 +6,12 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Moq;
 
 namespace Econtact.econtactClasses
 {
-    class contactClass
+
+    public class contactClass
     {
         //Getter Setter Properties 
         //Acts as Data Carrier in Our Application
@@ -20,7 +22,8 @@ namespace Econtact.econtactClasses
         public string Address { get; set; }
         public string Gender { get; set; }
 
-        static string myconnstrng = ConfigurationManager.ConnectionStrings["connstrng"].ConnectionString;
+        //string myconnstrng = ConfigurationManager.ConnectionStrings["connstrng"].ConnectionString;
+        string myconnstrng = "Data Source=CIRRUS\\VIJAY;Initial Catalog=Econtact;Integrated Security=True;";//ConfigurationManager.ConnectionStrings["connstrng"].ConnectionString;
 
         //SElecting Data from Database
         public DataTable Select()
@@ -117,7 +120,7 @@ namespace Econtact.econtactClasses
                 cmd.Parameters.AddWithValue("@Gender", c.Gender);
                 cmd.Parameters.AddWithValue("ContactID", c.ContactID);
                 //Open DAtabase Connection
-                conn.Open();
+                //conn.Open();
                 isSuccess = true;
                 //int rows = cmd.ExecuteNonQuery();
                 ////if the query runs sucessfully then the value of rows will be greater than zero else its value will be zero
@@ -156,7 +159,7 @@ namespace Econtact.econtactClasses
                 SqlCommand cmd = new SqlCommand(sql, conn);
                 cmd.Parameters.AddWithValue("@ContactID", c.ContactID);
                 //Open Connection
-                conn.Open();
+                //conn.Open();
                 isSuccess = true;
                 //int rows = cmd.ExecuteNonQuery();
                 ////If the query run sucessfully then the value of rows is greater than zero else its value is 0
