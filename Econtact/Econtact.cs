@@ -7,6 +7,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -15,13 +16,23 @@ namespace Econtact
 {
     public partial class Econtactcls : Form
     {
-        public contactClass c = new contactClass();
+        static string connectionString = "Data Source=CIRRUS\\VIJAY;Initial Catalog=Econtact;Integrated Security=True;";//ConfigurationManager.ConnectionStrings["connstrng"].ConnectionString;
+        // Create an instance of SqlDatabase, passing the connection string
+        static IDatabase database = new SqlDatabase(connectionString);
+
+        // Create an instance of contactClass, passing the database instance
+        contactClass c = new contactClass(database);
+
         public Econtactcls()
         {
             InitializeComponent();
 
         }
-       // c = new contactClass();
+        public Econtactcls(contactClass c)
+        {
+            this.c = c;
+            InitializeComponent();
+        }
         public void textBox1_TextChanged(object sender, EventArgs e)
         {
 
@@ -34,14 +45,50 @@ namespace Econtact
         public void add_Contact()
         {
             //Get the value from the input fields
-            c.FirstName = txtboxFirstName.Text;
-            c.LastName = txtboxLastName.Text;
-            c.ContactNo = txtBoxContactNumber.Text;
-            c.Address = txtBoxAddress.Text;
-            c.Gender = cmbGender.Text;
+            if (!string.IsNullOrEmpty(txtboxFirstName.Text) && !txtboxFirstName.Text.Any(char.IsDigit))
+            {
+                c.FirstName = txtboxFirstName.Text;
+            }
+            else
+            {
+                Console.WriteLine("Error: Invalid FirstName value");
+            }
+            if(!string.IsNullOrEmpty(txtboxLastName.Text) && !txtboxLastName.Text.Any(char.IsDigit))
+            {
+                c.LastName = txtboxLastName.Text;
+            }
+            else
+            {
+                Console.WriteLine("Error: Invalid LastName value");
+            }
+            if (!string.IsNullOrEmpty(txtBoxContactNumber.Text))
+            {
+                c.ContactNo = int.Parse(txtBoxContactNumber.Text);
+            }
+            else
+            {
+                Console.WriteLine("Error: Invalid ContactNumer value");
+            }
+            if (!string.IsNullOrEmpty(txtBoxAddress.Text))
+            {
+                c.Address = txtBoxAddress.Text;
+            }
+            else
+            {
+                Console.WriteLine("Error: Invalid Address value");
+            }
+            if (!string.IsNullOrEmpty(txtBoxAddress.Text) && (txtBoxAddress.Text != "Male" ||
+                 txtBoxAddress.Text != "Female"))
+            {
+                c.Gender = cmbGender.Text;
+            }
+            else
+            {
+                Console.WriteLine("Error: Invalid Gender value");
+            }
 
             //Inserting Data into DAtabase uing the method we created in previous episode
-            bool success = c.Insert(c);
+            bool success = c.Insert_Database(c);
             if(success==true)
             {
                 //Successfully Inserted
@@ -88,14 +135,51 @@ namespace Econtact
         public void update_Contact()
         {
             //Get the Data from textboxes
-            c.ContactID = 1;//int.Parse(txtboxContactID.Text);
-            c.FirstName = txtboxFirstName.Text;
-            c.LastName = txtboxLastName.Text;
-            c.ContactNo = txtBoxContactNumber.Text;
-            c.Address = txtBoxAddress.Text;
-            c.Gender = cmbGender.Text;
+            c.ContactID = 1; // int.Parse(txtboxContactID.Text);
+            //Get the value from the input fields
+            if (!string.IsNullOrEmpty(txtboxFirstName.Text) && !txtboxFirstName.Text.Any(char.IsDigit))
+            {
+                c.FirstName = txtboxFirstName.Text;
+            }
+            else
+            {
+                Console.WriteLine("Error: Invalid FirstName value");
+            }
+            if (!string.IsNullOrEmpty(txtboxLastName.Text) && !txtboxLastName.Text.Any(char.IsDigit))
+            {
+                c.LastName = txtboxLastName.Text;
+            }
+            else
+            {
+                Console.WriteLine("Error: Invalid LastName value");
+            }
+            if (!string.IsNullOrEmpty(txtBoxContactNumber.Text))
+            {
+                c.ContactNo = int.Parse(txtBoxContactNumber.Text);
+            }
+            else
+            {
+                Console.WriteLine("Error: Invalid ContactNumer value");
+            }
+            if (!string.IsNullOrEmpty(txtBoxAddress.Text))
+            {
+                c.Address = txtBoxAddress.Text;
+            }
+            else
+            {
+                Console.WriteLine("Error: Invalid Address value");
+            }
+            if (!string.IsNullOrEmpty(txtBoxAddress.Text) && (txtBoxAddress.Text == "Male" ||
+                 txtBoxAddress.Text == "Female"))
+            {
+                c.Gender = cmbGender.Text;
+            }
+            else
+            {
+                Console.WriteLine("Error: Invalid Gender value");
+            }
             //Update DAta in Database
-            bool success = c.Update(c);
+            bool success = c.Update_Database(c);
             if(success==true)
             {
                 //Updated Successfully
@@ -140,7 +224,7 @@ namespace Econtact
         {
             //Get the Contact ID fromt eh Application
             c.ContactID = Convert.ToInt32(txtboxContactID.Text);
-            bool success = c.Delete(c);
+            bool success = c.Delete_from_database(c);
             if(success==true)
             {
                 //Successfully Deleted
@@ -158,16 +242,18 @@ namespace Econtact
                 MessageBox.Show("Failed to Delete Dontact. Try Again.");
             }
         }
-        string myconnstr = "Data Source=CIRRUS\\VIJAY;Initial Catalog=Econtact;Integrated Security=True;";//ConfigurationManager.ConnectionStrings["connstrng"].ConnectionString;
+        //string myconnstr = "Data Source=CIRRUS\\VIJAY;Initial Catalog=Econtact;Integrated Security=True;";//ConfigurationManager.ConnectionStrings["connstrng"].ConnectionString;
         public void txtboxSearch_TextChanged(object sender, EventArgs e)
         {
             //Get teh value from text box
             string keyword = txtboxSearch.Text;
-            
-            SqlConnection conn = new SqlConnection(myconnstr);
-            SqlDataAdapter sda = new SqlDataAdapter("SELECT * FROM tbl_contact WHERE FirstName LIKE '%"+keyword+"%' OR LastName LIKE '%"+keyword+"%' OR Address LIKE '%"+keyword+"%'",conn);
+            Search(keyword);
+        }
+        public void Search(string keyword)
+        {
+            string sql = "SELECT * FROM tbl_contact WHERE FirstName LIKE '%" + keyword + "%' OR LastName LIKE '%" + keyword + "%' OR Address LIKE '%" + keyword;
             DataTable dt = new DataTable();
-            sda.Fill(dt);
+            dt = database.ExecuteQuery(sql, null);
             dgvContactList.DataSource = dt;
         }
     }

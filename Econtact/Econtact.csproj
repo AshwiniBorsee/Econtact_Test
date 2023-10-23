@@ -72,8 +72,10 @@
       <DependentUpon>Econtact.cs</DependentUpon>
     </Compile>
     <Compile Include="econtactClasses\contactClass.cs" />
+    <Compile Include="IDatabase.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SqlDatabase.cs" />
     <EmbeddedResource Include="Econtact.resx">
       <DependentUpon>Econtact.cs</DependentUpon>
     </EmbeddedResource>
