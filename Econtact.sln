@@ -5,7 +5,7 @@ VisualStudioVersion = 17.4.33927.135
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Econtact", "Econtact\Econtact.csproj", "{72AAF5DB-0927-4376-958F-4721DF16615D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTestProject1", "UnitTestProject1\UnitTestProject1.csproj", "{9720C44C-E6E1-4AAA-AF1B-D57E78ACCAAB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestProject", "UnitTestProject1\TestProject.csproj", "{9720C44C-E6E1-4AAA-AF1B-D57E78ACCAAB}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UIAutomation", "UIAutomation\UIAutomation.csproj", "{0D136BE3-1662-4307-A474-4A76B8749A80}"
 EndProject

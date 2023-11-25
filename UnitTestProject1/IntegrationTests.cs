@@ -6,10 +6,10 @@ using System;
 using System.Configuration;
 using System.Data;
 
-namespace UnitTestProject1
+namespace TestProject1
 {
     [TestClass]
-    public class UnitTest2
+    public class IntegrationTests
     {
 
         [TestMethod]
