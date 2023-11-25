@@ -10,6 +10,7 @@ using FlaUI.Core.Tools;
 using System.Threading;
 using Econtact;
 using System.Data;
+using System.IO;
 
 namespace UIAutomation
 {
@@ -301,7 +302,9 @@ namespace UIAutomation
 
         protected Application StartApplication()
         {
-            return Application.Launch("C:\\Users\\atire\\OneDrive\\Documents\\ashwini\\Econtact\\Econtact\\bin\\Debug\\Econtact.exe");
+            string executablePath = @"..\..\..\Econtact\bin\Debug\Econtact.exe";
+            string fullPath = Path.GetFullPath(executablePath);
+            return Application.Launch(fullPath);
         }
 
 
