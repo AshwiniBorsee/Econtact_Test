@@ -16,15 +16,18 @@ namespace Econtact
 {
     public partial class Econtactcls : Form
     {
-        static string connectionString = "Data Source=CIRRUS\\VIJAY;Initial Catalog=Econtact;Integrated Security=True;";//ConfigurationManager.ConnectionStrings["connstrng"].ConnectionString;
+        static string connectionString; //ConfigurationManager.ConnectionStrings["connstrng"].ConnectionString;
         // Create an instance of SqlDatabase, passing the connection string
-        static IDatabase database = new SqlDatabase(connectionString);
+        static IDatabase database; //= new SqlDatabase(connectionString);
 
         // Create an instance of contactClass, passing the database instance
-        contactClass c = new contactClass(database);
+        contactClass c;// = new contactClass(database);
 
         public Econtactcls()
         {
+            connectionString = ConfigurationManager.ConnectionStrings["connstrng"].ConnectionString;
+            database = new SqlDatabase(connectionString);
+            c = new contactClass(database);
             InitializeComponent();
 
         }
@@ -51,7 +54,7 @@ namespace Econtact
             }
             else
             {
-                Console.WriteLine("Error: Invalid FirstName value");
+               throw new Exception("Error: Invalid FirstName value");
             }
             if(!string.IsNullOrEmpty(txtboxLastName.Text) && !txtboxLastName.Text.Any(char.IsDigit))
             {
@@ -59,7 +62,7 @@ namespace Econtact
             }
             else
             {
-                Console.WriteLine("Error: Invalid LastName value");
+               throw new Exception("Error: Invalid LastName value");
             }
             if (!string.IsNullOrEmpty(txtBoxContactNumber.Text))
             {
@@ -67,7 +70,7 @@ namespace Econtact
             }
             else
             {
-                Console.WriteLine("Error: Invalid ContactNumer value");
+               throw new Exception("Error: Invalid ContactNumer value");
             }
             if (!string.IsNullOrEmpty(txtBoxAddress.Text))
             {
@@ -75,7 +78,7 @@ namespace Econtact
             }
             else
             {
-                Console.WriteLine("Error: Invalid Address value");
+               throw new Exception("Error: Invalid Address value");
             }
             if (!string.IsNullOrEmpty(txtBoxAddress.Text) && (txtBoxAddress.Text != "Male" ||
                  txtBoxAddress.Text != "Female"))
@@ -84,7 +87,7 @@ namespace Econtact
             }
             else
             {
-                Console.WriteLine("Error: Invalid Gender value");
+               throw new Exception("Error: Invalid Gender value");
             }
 
             //Inserting Data into DAtabase uing the method we created in previous episode
@@ -92,14 +95,14 @@ namespace Econtact
             if(success==true)
             {
                 //Successfully Inserted
-                MessageBox.Show("New Contact Successfully Inserted");
+               Console.WriteLine("New Contact Successfully Inserted");
                 //Call the Clear Method Here
                 Clear();
             }
             else
             {
                 //FAiled to Add Contact
-                MessageBox.Show("Failed to add New Contact. Try Again.");
+                throw new Exception("Error: Failed to add New Contact. Try Again.");
             }
             //Load Data on Data GRidview
             DataTable dt = c.Select();
@@ -135,7 +138,7 @@ namespace Econtact
         public void update_Contact()
         {
             //Get the Data from textboxes
-            c.ContactID = 1; // int.Parse(txtboxContactID.Text);
+            c.ContactID = int.Parse(txtboxContactID.Text);
             //Get the value from the input fields
             if (!string.IsNullOrEmpty(txtboxFirstName.Text) && !txtboxFirstName.Text.Any(char.IsDigit))
             {
@@ -143,7 +146,7 @@ namespace Econtact
             }
             else
             {
-                Console.WriteLine("Error: Invalid FirstName value");
+               throw new Exception("Error: Invalid FirstName value");
             }
             if (!string.IsNullOrEmpty(txtboxLastName.Text) && !txtboxLastName.Text.Any(char.IsDigit))
             {
@@ -151,7 +154,7 @@ namespace Econtact
             }
             else
             {
-                Console.WriteLine("Error: Invalid LastName value");
+               throw new Exception("Error: Invalid LastName value");
             }
             if (!string.IsNullOrEmpty(txtBoxContactNumber.Text))
             {
@@ -159,7 +162,7 @@ namespace Econtact
             }
             else
             {
-                Console.WriteLine("Error: Invalid ContactNumer value");
+                throw new Exception("Error: Invalid ContactNumer value");
             }
             if (!string.IsNullOrEmpty(txtBoxAddress.Text))
             {
@@ -167,23 +170,23 @@ namespace Econtact
             }
             else
             {
-                Console.WriteLine("Error: Invalid Address value");
+                throw new Exception("Error: Invalid Address value");
             }
-            if (!string.IsNullOrEmpty(txtBoxAddress.Text) && (txtBoxAddress.Text == "Male" ||
-                 txtBoxAddress.Text == "Female"))
+            if (!string.IsNullOrEmpty(cmbGender.Text) && (cmbGender.Text == "Male" ||
+                 cmbGender.Text == "Female"))
             {
                 c.Gender = cmbGender.Text;
             }
             else
             {
-                Console.WriteLine("Error: Invalid Gender value");
+               throw new Exception("Error: Invalid Gender value");
             }
             //Update DAta in Database
             bool success = c.Update_Database(c);
             if(success==true)
             {
                 //Updated Successfully
-                MessageBox.Show("Contact has been successfully Updated.");
+               Console.WriteLine("Contact has been successfully Updated.");
                 //Load Data on Data GRidview
                 DataTable dt = c.Select();
                 dgvContactList.DataSource = dt;
@@ -193,7 +196,7 @@ namespace Econtact
             else
             {
                 //Failed to Update
-                MessageBox.Show("Failed to Update Contact.Try Again.");
+               throw new Exception("Error: Failed to Update Contact.Try Again.");
             }
         }
 
@@ -228,7 +231,7 @@ namespace Econtact
             if(success==true)
             {
                 //Successfully Deleted
-                MessageBox.Show("Contact successfully deleted.");
+               Console.WriteLine("Contact successfully deleted.");
                 //Refresh Data GridView
                 //Load Data on Data GRidview
                 DataTable dt = c.Select();
@@ -239,22 +242,23 @@ namespace Econtact
             else
             {
                 //FAiled to dElte
-                MessageBox.Show("Failed to Delete Dontact. Try Again.");
+               Console.WriteLine("Failed to Delete Dontact. Try Again.");
             }
         }
-        //string myconnstr = "Data Source=CIRRUS\\VIJAY;Initial Catalog=Econtact;Integrated Security=True;";//ConfigurationManager.ConnectionStrings["connstrng"].ConnectionString;
         public void txtboxSearch_TextChanged(object sender, EventArgs e)
         {
             //Get teh value from text box
             string keyword = txtboxSearch.Text;
-            Search(keyword);
+            DataTable dt = new DataTable();
+            dt = Search(keyword);
+            dgvContactList.DataSource = dt;
         }
-        public void Search(string keyword)
+        public DataTable Search(string keyword)
         {
-            string sql = "SELECT * FROM tbl_contact WHERE FirstName LIKE '%" + keyword + "%' OR LastName LIKE '%" + keyword + "%' OR Address LIKE '%" + keyword;
+            string sql = "SELECT * FROM tbl_contact WHERE FirstName LIKE '%" + keyword + "%' OR LastName LIKE '%" + keyword + "%' OR Address LIKE '%" + keyword + "%'";
             DataTable dt = new DataTable();
             dt = database.ExecuteQuery(sql, null);
-            dgvContactList.DataSource = dt;
+            return dt;
         }
     }
 }

@@ -82,7 +82,7 @@
             this.txtboxContactID.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtboxContactID.Location = new System.Drawing.Point(221, 112);
             this.txtboxContactID.Name = "txtboxContactID";
-            this.txtboxContactID.ReadOnly = true;
+            this.txtboxContactID.ReadOnly = false;
             this.txtboxContactID.Size = new System.Drawing.Size(201, 26);
             this.txtboxContactID.TabIndex = 2;
             // 

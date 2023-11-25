@@ -103,7 +103,7 @@ namespace Econtact.econtactClasses
                     new SqlParameter("@ContactNo", c.ContactNo),
                     new SqlParameter("@Address", c.Address),
                     new SqlParameter("@Gender", c.Gender),
-                    new SqlParameter("@Gender", c.ContactID)
+                    new SqlParameter("@ContactID", c.ContactID)
                 };
 
                 int rows = _database.ExecuteNonQuery(sql, parameters);
@@ -137,7 +137,7 @@ namespace Econtact.econtactClasses
 
                 SqlParameter[] parameters =
                {
-                    new SqlParameter("@Gender", c.ContactID)
+                    new SqlParameter("@ContactID", c.ContactID)
                 };
 
                 int rows = _database.ExecuteNonQuery(sql, parameters);

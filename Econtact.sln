@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Econtact", "Econtact\Econta
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTestProject1", "UnitTestProject1\UnitTestProject1.csproj", "{9720C44C-E6E1-4AAA-AF1B-D57E78ACCAAB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UIAutomation", "UIAutomation\UIAutomation.csproj", "{0D136BE3-1662-4307-A474-4A76B8749A80}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{9720C44C-E6E1-4AAA-AF1B-D57E78ACCAAB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9720C44C-E6E1-4AAA-AF1B-D57E78ACCAAB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9720C44C-E6E1-4AAA-AF1B-D57E78ACCAAB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0D136BE3-1662-4307-A474-4A76B8749A80}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0D136BE3-1662-4307-A474-4A76B8749A80}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0D136BE3-1662-4307-A474-4A76B8749A80}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0D136BE3-1662-4307-A474-4A76B8749A80}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
