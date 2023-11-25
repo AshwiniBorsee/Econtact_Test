@@ -37,7 +37,8 @@ namespace UIAutomation
             var add_button = window.FindFirstDescendant(cf => cf.ByAutomationId("btnAdd")).AsButton();
             add_button.Click();
             Wait.UntilInputIsProcessed();
-            //app.Close();
+            Thread.Sleep(3000);
+            app.Close();
             //Assert.AreEqual(0, app.ExitCode);
 
         }

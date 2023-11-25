@@ -12,7 +12,9 @@ namespace UnitTestProject1
     public class UnitTest1
     {
         [TestMethod]
-        public void Verify_Add_Contact_Valid_Data()
+        [DataRow("Chris", "Tate", "83782758", "Seattle", "Male")]
+        [DataRow("Sam", "Fog", "287498859", "Kent", "FeMale")]
+        public void Verify_Add_Contact_Valid_Data(String FirstName, String LastName, String ContactNo, String Address, String Gender)
         {
             /// <summary>
             /// 1. Add valid data while creating new data
@@ -30,11 +32,11 @@ namespace UnitTestProject1
 
             // act
             Econtactcls econtactcls = new Econtactcls(contact);
-            econtactcls.txtboxFirstName.Text = "Test";
-            econtactcls.txtboxLastName.Text = "Done";
-            econtactcls.txtBoxContactNumber.Text = "1234567890";
-            econtactcls.txtBoxAddress.Text = "Seattle";
-            econtactcls.cmbGender.Text = "Male";
+            econtactcls.txtboxFirstName.Text = FirstName;
+            econtactcls.txtboxLastName.Text = LastName;
+            econtactcls.txtBoxContactNumber.Text = ContactNo;
+            econtactcls.txtBoxAddress.Text = Address;
+            econtactcls.cmbGender.Text = Gender;
 
             try
             {
@@ -51,7 +53,16 @@ namespace UnitTestProject1
         }
         
         [TestMethod]
-        public void Verify_Add_Contact_Invalid_Data()
+        [DataRow("234Bob", "Tate", "83782758", "Seattle", "Male", DisplayName = "Verify_Add_Contact_Invalid_FirstName")]
+        [DataRow("", "Tate", "83782758", "Seattle", "Male", DisplayName = "Verify_Add_Contact_Invalid_Empty_FirstName")]
+        [DataRow("Sam", "876458Duglus", "287498859", "Kent", "FeMale", DisplayName = "Verify_Add_Contact_Invalid_LastName")]
+        [DataRow("Sam", "", "287498859", "Kent", "FeMale", DisplayName = "Verify_Add_Contact_Invalid_Empty_LastName")]
+        [DataRow("Alice", "Bob", "fshdjh", "New York", "Male", DisplayName = "Verify_Add_Contact_Invalid_ContactNumber")]
+        [DataRow("Alice", "Bob", "", "New York", "Male", DisplayName = "Verify_Add_Contact_Invalid_Empty_ContactNumber")]
+        [DataRow("Dave", "Pat", "58785006", "", "FeMale", DisplayName = "Verify_Add_Contact_Invalid_Empty_Address")]
+        [DataRow("George", "Joe", "387592386", "Dalls", "dbnbcjh", DisplayName = "Verify_Add_Contact_Invalid_Gender")]
+        [DataRow("George", "Joe", "387592386", "Dalls", "", DisplayName = "Verify_Add_Contact_Invalid_Empty_Gender")]
+        public void Verify_Add_Contact_Invalid_Data(String FirstName, String LastName, String ContactNo, String Address, String Gender)
         {
             /// <summary>
             /// 1. Add valid data while creating new data with invalid input string.
@@ -70,11 +81,11 @@ namespace UnitTestProject1
 
             Econtactcls econtactcls = new Econtactcls(contact);
 
-            econtactcls.txtboxFirstName.Text = "123Ac";
-            econtactcls.txtboxLastName.Text = "346cd";
-            econtactcls.txtBoxContactNumber.Text = "sdfnmb";
-            econtactcls.txtBoxAddress.Text = "";
-            econtactcls.cmbGender.Text = "sdbhj";
+            econtactcls.txtboxFirstName.Text = FirstName;
+            econtactcls.txtboxLastName.Text = LastName;
+            econtactcls.txtBoxContactNumber.Text = ContactNo;
+            econtactcls.txtBoxAddress.Text = Address;
+            econtactcls.cmbGender.Text = Gender;
             
             // act
             try
@@ -94,7 +105,13 @@ namespace UnitTestProject1
         }
 
         [TestMethod]
-        public void Verify_Update_Contact_Valid_Data()
+        [DataRow("Matthew", "Josh", "83782758", "Seattle", "Male", "FirstName", "Mat", DisplayName ="Verify_Update_FirstName_Contact")]
+        [DataRow("Sam", "Ryal", "287498859", "Kent", "Female", "LastName", "Rayl", DisplayName = "Verify_Update_LastName_Contact")]
+        [DataRow("Alice", "Bob", "2483598", "New York", "Male", "ContactNo", "3824893", DisplayName = "Verify_Update_ContactNo_Contact")]
+        [DataRow("Dave", "Pat", "58785006", "Portlan", "Female", "Address", "Orlando", DisplayName = "Verify_Update_Address_Contact")]
+        [DataRow("George", "Joe", "387592386", "Dalls", "Male", "Gender", "Female", DisplayName = "Verify_Update_Gender_Contact")]
+        public void Verify_Update_Contact_Valid_Data
+                (String FirstName, String LastName, String ContactNo, String Address, String Gender, String Field_to_update, String New_Value)
         {
             /// <summary>
             /// 1. Add valid data while creating new data
@@ -113,21 +130,21 @@ namespace UnitTestProject1
             var contact = new contactClass(mockDatabase.Object);
 
             Econtactcls econtactcls = new Econtactcls(contact);
-            econtactcls.txtboxFirstName.Text = "Taylor";
-            econtactcls.txtboxLastName.Text = "Swift";
-            econtactcls.txtBoxContactNumber.Text = "1234567890";
-            econtactcls.txtBoxAddress.Text = "Seattle";
-            econtactcls.cmbGender.Text = "Female";
+            econtactcls.txtboxFirstName.Text = FirstName;
+            econtactcls.txtboxLastName.Text = LastName;
+            econtactcls.txtBoxContactNumber.Text = ContactNo;
+            econtactcls.txtBoxAddress.Text = Address;
+            econtactcls.cmbGender.Text = Gender;
 
             //act
             try
             {
                 econtactcls.add_Contact();
-                econtactcls.txtboxFirstName.Text = "Unit";
-                econtactcls.txtboxLastName.Text = "Swift";
-                econtactcls.txtBoxContactNumber.Text = "57648579";
-                econtactcls.txtBoxAddress.Text = "Seattle";
-                econtactcls.cmbGender.Text = "Female";
+                econtactcls.txtboxFirstName.Text = (Field_to_update == "FirstName") ? New_Value : FirstName;
+                econtactcls.txtboxLastName.Text = (Field_to_update == "LastName") ? New_Value : LastName;
+                econtactcls.txtBoxContactNumber.Text = (Field_to_update == "ContactNo") ? New_Value : ContactNo;
+                econtactcls.txtBoxAddress.Text= (Field_to_update == "Address") ? New_Value : Address;
+                econtactcls.cmbGender.Text = (Field_to_update == "Gender") ? New_Value : Gender;
                 econtactcls.txtboxContactID.Text = "1";
                 econtactcls.update_Contact();
             }
@@ -140,6 +157,7 @@ namespace UnitTestProject1
 
         }
 
+        
         public void Verify_Update_Non_Existing_contact()
         {
             /// <summary>

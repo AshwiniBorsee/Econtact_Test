@@ -80,8 +80,8 @@ namespace Econtact
             {
                throw new Exception("Error: Invalid Address value");
             }
-            if (!string.IsNullOrEmpty(txtBoxAddress.Text) && (txtBoxAddress.Text != "Male" ||
-                 txtBoxAddress.Text != "Female"))
+            if (!string.IsNullOrEmpty(cmbGender.Text) && (cmbGender.Text == "Male" ||
+                 cmbGender.Text == "Female"))
             {
                 c.Gender = cmbGender.Text;
             }
