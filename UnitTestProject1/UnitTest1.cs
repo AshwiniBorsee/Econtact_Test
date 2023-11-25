@@ -124,7 +124,11 @@ namespace UnitTestProject1
             {
                 econtactcls.add_Contact();
                 econtactcls.txtboxFirstName.Text = "Unit";
+                econtactcls.txtboxLastName.Text = "Swift";
                 econtactcls.txtBoxContactNumber.Text = "57648579";
+                econtactcls.txtBoxAddress.Text = "Seattle";
+                econtactcls.cmbGender.Text = "Female";
+                econtactcls.txtboxContactID.Text = "1";
                 econtactcls.update_Contact();
             }
             //assert
