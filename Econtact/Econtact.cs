@@ -95,14 +95,15 @@ namespace Econtact
             if(success==true)
             {
                 //Successfully Inserted
-               Console.WriteLine("New Contact Successfully Inserted");
+               MessageBox.Show("New Contact Successfully Inserted");
                 //Call the Clear Method Here
                 Clear();
             }
             else
             {
                 //FAiled to Add Contact
-                throw new Exception("Error: Failed to add New Contact. Try Again.");
+                MessageBox.Show("Add contact failed");
+                Console.WriteLine("Error: Failed to add New Contact. Try Again.");
             }
             //Load Data on Data GRidview
             DataTable dt = c.Select();
@@ -186,7 +187,7 @@ namespace Econtact
             if(success==true)
             {
                 //Updated Successfully
-               Console.WriteLine("Contact has been successfully Updated.");
+               MessageBox.Show("Contact has been successfully Updated.");
                 //Load Data on Data GRidview
                 DataTable dt = c.Select();
                 dgvContactList.DataSource = dt;
@@ -196,7 +197,8 @@ namespace Econtact
             else
             {
                 //Failed to Update
-               throw new Exception("Error: Failed to Update Contact.Try Again.");
+                MessageBox.Show("Update Contact Failed");
+               Console.WriteLine("Error: Failed to Update Contact.Try Again.");
             }
         }
 
@@ -231,7 +233,7 @@ namespace Econtact
             if(success==true)
             {
                 //Successfully Deleted
-               Console.WriteLine("Contact successfully deleted.");
+               MessageBox.Show("Contact successfully deleted.");
                 //Refresh Data GridView
                 //Load Data on Data GRidview
                 DataTable dt = c.Select();
@@ -242,6 +244,7 @@ namespace Econtact
             else
             {
                 //FAiled to dElte
+                MessageBox.Show("Delete contact failed");
                Console.WriteLine("Failed to Delete Dontact. Try Again.");
             }
         }
