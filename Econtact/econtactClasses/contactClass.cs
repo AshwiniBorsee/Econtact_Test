@@ -75,6 +75,7 @@ namespace Econtact.econtactClasses
                 else
                 {
                     isSuccess = false;
+                    throw new Exception("Error: Failed to insert");
                 }
             }
             catch(Exception ex)
@@ -115,6 +116,7 @@ namespace Econtact.econtactClasses
                 else
                 {
                     isSuccess = false;
+                    throw new Exception("Error: Failed to insert");
                 }
             }
             catch(Exception ex)
@@ -150,6 +152,7 @@ namespace Econtact.econtactClasses
                 else
                 {
                     isSuccess = false;
+                    throw new Exception("Error: Failed to insert");
                 }
             }
             catch(Exception ex)

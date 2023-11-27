@@ -51,7 +51,47 @@ namespace TestProject1
             Console.WriteLine("Test passed. Add_contact()");
 
         }
-        
+
+        [TestMethod]
+        [DataRow("Chris", "Tate", "83782758", "Seattle", "Male")]
+        public void Verify_Add_Contact_Valid_Data_Negative(String FirstName, String LastName, String ContactNo, String Address, String Gender)
+        {
+            /// <summary>
+            /// 1. Add valid data while creating new data
+            /// 2. Mock function is used to replace database module
+            /// 3. Validating Add_Contact event handler with this unit test
+            /// 4. With valid data inpus, add_contact is successful.
+            /// 5. Assert if add_contact is failed.
+            /// <summary>
+            // arrange
+            var mockDatabase = new Mock<IDatabase>();
+            mockDatabase.Setup
+                (d => d.ExecuteNonQuery(It.IsAny<string>(), It.IsAny<SqlParameter[]>())).Returns(0);
+
+            var contact = new contactClass(mockDatabase.Object);
+
+            // act
+            Econtactcls econtactcls = new Econtactcls(contact);
+            econtactcls.txtboxFirstName.Text = FirstName;
+            econtactcls.txtboxLastName.Text = LastName;
+            econtactcls.txtBoxContactNumber.Text = ContactNo;
+            econtactcls.txtBoxAddress.Text = Address;
+            econtactcls.cmbGender.Text = Gender;
+
+            try
+            {
+                econtactcls.add_Contact();
+            }
+            // assert
+            catch (ConfigurationErrorsException ex)
+            {
+
+                Assert.Equals("Failed to add New Contact. Try Again.", ex.Message);
+            }
+            Console.WriteLine("Test passed. Add_contact negative()");
+
+        }
+
         [TestMethod]
         [DataRow("234Bob", "Tate", "83782758", "Seattle", "Male", DisplayName = "Verify_Add_Contact_Invalid_FirstName")]
         [DataRow("", "Tate", "83782758", "Seattle", "Male", DisplayName = "Verify_Add_Contact_Invalid_Empty_FirstName")]
@@ -157,7 +197,56 @@ namespace TestProject1
 
         }
 
-        
+        [TestMethod]
+        [DataRow("George", "Joe", "387592386", "Dalls", "Male", "Gender", "Female", DisplayName = "Verify_Update_Gender_Contact")]
+        public void Verify_Update_Contact_Valid_Data_Negative
+                (String FirstName, String LastName, String ContactNo, String Address, String Gender, String Field_to_update, String New_Value)
+        {
+            /// <summary>
+            /// 1. Add valid data while creating new data
+            /// 2. Mock function is used to replace database module
+            /// 3. Validating update_contact button click event handler with this unit test
+            /// 4. Update the existing contacted added in step 1, update_contact should successful.
+            /// 5. Assert if update_contact is failed.
+            /// <summary>
+
+            // arrange
+            var mockDatabase = new Mock<IDatabase>();
+            mockDatabase.Setup
+                (d => d.ExecuteNonQuery(It.IsAny<string>(), It.IsAny<SqlParameter[]>())).Returns(0);
+            mockDatabase.Setup
+                (d => d.ExecuteQuery(It.IsAny<string>(), It.IsAny<SqlParameter[]>())).Returns(new System.Data.DataTable());
+            var contact = new contactClass(mockDatabase.Object);
+
+            Econtactcls econtactcls = new Econtactcls(contact);
+            econtactcls.txtboxFirstName.Text = FirstName;
+            econtactcls.txtboxLastName.Text = LastName;
+            econtactcls.txtBoxContactNumber.Text = ContactNo;
+            econtactcls.txtBoxAddress.Text = Address;
+            econtactcls.cmbGender.Text = Gender;
+
+            //act
+            try
+            {
+                econtactcls.add_Contact();
+                econtactcls.txtboxFirstName.Text = (Field_to_update == "FirstName") ? New_Value : FirstName;
+                econtactcls.txtboxLastName.Text = (Field_to_update == "LastName") ? New_Value : LastName;
+                econtactcls.txtBoxContactNumber.Text = (Field_to_update == "ContactNo") ? New_Value : ContactNo;
+                econtactcls.txtBoxAddress.Text = (Field_to_update == "Address") ? New_Value : Address;
+                econtactcls.cmbGender.Text = (Field_to_update == "Gender") ? New_Value : Gender;
+                econtactcls.txtboxContactID.Text = "1";
+                econtactcls.update_Contact();
+            }
+            //assert
+            catch (ConfigurationErrorsException ex)
+            {
+                Assert.Equals("Error: Failed to Update Contact.Try Again.", ex.Message);
+            }
+            Console.WriteLine("Test Passed: Update contact test is passed.");
+
+        }
+
+        [TestMethod]
         [DataRow("Chris", "Tate", "83782758", "Seattle", "Male")]
         public void Verify_Update_Non_Existing_contact(String FirstName, String LastName, String ContactNo, String Address, String Gender)
         {
@@ -206,7 +295,7 @@ namespace TestProject1
         [TestMethod]
         [DataRow("Matthew", "Josh", "83782758", "Seattle", "Male", "FirstName", "23455", DisplayName = "Verify_Update_Invalid_FirstName_Contact")]
         [DataRow("Sam", "Ryal", "287498859", "Kent", "Female", "LastName", "", DisplayName = "Verify_Update__Invalid_LastName_Contact")]
-        [DataRow("Alice", "Bob", "2483598", "New York", "Male", "ContactNo", "jsfjkdgh", DisplayName = "Verify_Update_Invalid_ContactNo_Contact")]
+        [DataRow("Alice", "Bob", "2483598", "New York", "Male", "ContactNo", "", DisplayName = "Verify_Update_Invalid_ContactNo_Contact")]
         [DataRow("Dave", "Pat", "58785006", "Portlan", "Female", "Address", "", DisplayName = "Verify_Update_Invalid_Address_Contact")]
         [DataRow("George", "Joe", "387592386", "Dalls", "Male", "Gender", "vskfkjl", DisplayName = "Verify_Update_Invalid_Gender_Contact")]
         public void Verify_Update_contact_Invalid_Data
@@ -298,6 +387,49 @@ namespace TestProject1
             catch (ConfigurationErrorsException ex)
             {
                 Assert.Fail($"Test Failed: Error while deleting contact.Message {ex.Message}");
+            }
+            Console.WriteLine("Test Passed: Delete contact test is passed.");
+
+        }
+
+        [TestMethod]
+        [DataRow("Sam", "Fog", "287498859", "Kent", "FeMale")]
+        public void Verify_Delete_contact_Valid_Data_Negative(String FirstName, String LastName, String ContactNo, String Address, String Gender)
+        {
+            /// <summary>
+            /// 1. Add valid data while creating new data
+            /// 2. Mock function is used to replace database module
+            /// 3. Validating delete_contact button click event handler with this unit test
+            /// 4. Delete contacted added in step 1, update_contact should successful.
+            /// 5. Assert if update_contact is failed.
+            /// <summary>
+
+            // arrange
+            var mockDatabase = new Mock<IDatabase>();
+            mockDatabase.Setup
+                (d => d.ExecuteNonQuery(It.IsAny<string>(), It.IsAny<SqlParameter[]>())).Returns(0);
+            mockDatabase.Setup
+                (d => d.ExecuteQuery(It.IsAny<string>(), It.IsAny<SqlParameter[]>())).Returns(new System.Data.DataTable());
+            var contact = new contactClass(mockDatabase.Object);
+
+            Econtactcls econtactcls = new Econtactcls(contact);
+            econtactcls.txtboxFirstName.Text = FirstName;
+            econtactcls.txtboxLastName.Text = LastName;
+            econtactcls.txtBoxContactNumber.Text = ContactNo;
+            econtactcls.txtBoxAddress.Text = Address;
+            econtactcls.cmbGender.Text = Gender;
+
+            //act
+            try
+            {
+                econtactcls.add_Contact();
+                econtactcls.txtboxContactID.Text = "1";
+                econtactcls.delete_Contact();
+            }
+            //assert
+            catch (ConfigurationErrorsException ex)
+            {
+                Assert.Equals("Failed to Delete Dontact. Try Again.",ex.Message);
             }
             Console.WriteLine("Test Passed: Delete contact test is passed.");
 
@@ -446,7 +578,8 @@ namespace TestProject1
         }
 
         [TestMethod]
-        public void Verify_Insert_Database()
+        [DataRow("Chris", "Tate", "83782758", "Seattle", "Male")]
+        public void Verify_Insert_Database(String FirstName, String LastName, String ContactNo, String Address, String Gender)
         {
             /// <summary>
             /// 1. Verify Insert Database Operation
@@ -458,10 +591,10 @@ namespace TestProject1
             mockDatabase.Setup
                 (d => d.ExecuteNonQuery(It.IsAny<string>(), It.IsAny<SqlParameter[]>())).Returns(1);
             var contact = new contactClass(mockDatabase.Object);
-            contact.FirstName = "Taylor";
-            contact.LastName = "Swift";
-            contact.Address = "Bush Street, Seattle";
-            contact.ContactNo = 123183418;
+            contact.FirstName = FirstName;
+            contact.LastName = LastName;
+            contact.Address = Address;
+            contact.ContactNo = (int)long.Parse(ContactNo);
             contact.Gender = "Female";
             // act
             try
@@ -479,7 +612,8 @@ namespace TestProject1
         }
 
         [TestMethod]
-        public void Verify_Insert_Database_With_Exception()
+        [DataRow("Chris", "Tate", "83782758", "Seattle", "Male")]
+        public void Verify_Insert_Database_With_Exception(String FirstName, String LastName, String ContactNo, String Address, String Gender)
         {
             /// <summary>
             /// 1. Verify Insert Database Operation, send contact_no in text format
@@ -489,11 +623,11 @@ namespace TestProject1
             // arrange
             var mockDatabase = new Mock<IDatabase>();
             var contact = new contactClass(mockDatabase.Object);
-            contact.FirstName = "Taylor";
-            contact.LastName = "Swift";
-            contact.Address = "Bush Street, Seattle";
-            contact.ContactNo = 17398721;
-            contact.Gender = "Female";
+            contact.FirstName = FirstName;
+            contact.LastName = LastName;
+            contact.Address = Address;
+            contact.ContactNo = (int)long.Parse(ContactNo); ;
+            contact.Gender = Gender;
             contact.ContactID = 1;
 
             string sql = "INSERT INTO tbl_contact" +
@@ -516,7 +650,8 @@ namespace TestProject1
         }
 
         [TestMethod]
-        public void Verify_Update_Database()
+        [DataRow("Chris", "Tate", "83782758", "Seattle", "Male")]
+        public void Verify_Update_Database(String FirstName, String LastName, String ContactNo, String Address, String Gender)
         {
             /// <summary>
             /// 1. Verify Update Database Operation
@@ -528,11 +663,11 @@ namespace TestProject1
             mockDatabase.Setup
                 (d => d.ExecuteNonQuery(It.IsAny<string>(), It.IsAny<SqlParameter[]>())).Returns(1);
             var contact = new contactClass(mockDatabase.Object);
-            contact.FirstName = "Taylor";
-            contact.LastName = "Swift";
-            contact.Address = "Bush Street, Seattle";
-            contact.ContactNo = 1231834187;
-            contact.Gender = "Female";
+            contact.FirstName = FirstName;
+            contact.LastName = LastName;
+            contact.Address = Address;
+            contact.ContactNo = (int)long.Parse(ContactNo);
+            contact.Gender = Gender;
             // act
             try
             {
@@ -550,7 +685,8 @@ namespace TestProject1
         }
 
         [TestMethod]
-        public void Verify_Update_Database_With_Exception()
+        [DataRow("Chris", "Tate", "83782758", "Seattle", "Male")]
+        public void Verify_Update_Database_With_Exception(String FirstName, String LastName, String ContactNo, String Address, String Gender)
         {
             /// <summary>
             /// 1. Verify update Database Operation, send contact_no in text format, invalid format.
@@ -560,11 +696,11 @@ namespace TestProject1
             // arrange
             var mockDatabase = new Mock<IDatabase>();
             var contact = new contactClass(mockDatabase.Object);
-            contact.FirstName = "Taylor";
-            contact.LastName = "Swift";
-            contact.Address = "Bush Street, Seattle";
-            contact.ContactNo = 12345678;
-            contact.Gender = "Female";
+            contact.FirstName = FirstName;
+            contact.LastName = LastName;
+            contact.Address = Address;
+            contact.ContactNo = (int)long.Parse(ContactNo);
+            contact.Gender = Gender;
             contact.ContactID = 1;
 
             string sql = "UPDATE tbl_contact SET " +
@@ -587,7 +723,9 @@ namespace TestProject1
 
         }
 
-        public void Verify_Delete_Database()
+        [TestMethod]
+        [DataRow("Chris", "Tate", "83782758", "Seattle", "Male")]
+        public void Verify_Delete_Database(String FirstName, String LastName, String ContactNo, String Address, String Gender)
         {
             /// <summary>
             /// 1. Verify Delete Database Operation which is inserted.
@@ -599,11 +737,11 @@ namespace TestProject1
             mockDatabase.Setup
                 (d => d.ExecuteNonQuery(It.IsAny<string>(), It.IsAny<SqlParameter[]>())).Returns(1);
             var contact = new contactClass(mockDatabase.Object);
-            contact.FirstName = "Taylor";
-            contact.LastName = "Swift";
-            contact.Address = "Bush Street, Seattle";
-            contact.ContactNo = 23442547;
-            contact.Gender = "Female";
+            contact.FirstName = FirstName;
+            contact.LastName = LastName;
+            contact.Address = Address;
+            contact.ContactNo = (int)long.Parse(ContactNo); ;
+            contact.Gender = Gender;
             // act
             try
             {
@@ -621,7 +759,8 @@ namespace TestProject1
         }
 
         [TestMethod]
-        public void Verify_Delete_Database_With_Exception()
+        [DataRow("Chris", "Tate", "83782758", "Seattle", "Male")]
+        public void Verify_Delete_Database_With_Exception(String FirstName, String LastName, String ContactNo, String Address, String Gender)
         {
             /// <summary>
             /// 1. Verify Delete Database Operation, send contact_no in text format
@@ -631,11 +770,11 @@ namespace TestProject1
             // arrange
             var mockDatabase = new Mock<IDatabase>();
             var contact = new contactClass(mockDatabase.Object);
-            contact.FirstName = "Taylor";
-            contact.LastName = "Swift";
-            contact.Address = "Bush Street, Seattle";
-            contact.ContactNo = 1234676235;
-            contact.Gender = "Female";
+            contact.FirstName = FirstName;
+            contact.LastName = LastName;
+            contact.Address = Address;
+            contact.ContactNo = (int)long.Parse(ContactNo);
+            contact.Gender = Gender;
             contact.ContactID = 1;
 
             string sql = "DELETE FROM tbl_contact WHERE ContactID=@ContactID";

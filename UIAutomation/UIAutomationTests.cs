@@ -19,7 +19,7 @@ namespace UIAutomation
     {
         [TestMethod]
         [DataRow("Chris", "Tate", "83782758", "Seattle", "Male", DisplayName = "Verify_UI_Add_Contact_Valid_Data")]
-        //[DataRow("23454", "Kayle", "8729523", "Charlotte", "Female", DisplayName = "Verify_UI_Add_Contact_Invalid_Data")]
+        
         public void Verify_UI_Add_Contact(String FirstName, String LastName, String ContactNo, String Address, String Gender)
         {
             //Step 1: Launch application
@@ -61,7 +61,7 @@ namespace UIAutomation
         [DataRow("Matthew", "Josh", "83782758", "Seattle", "Male", "FirstName", "Mat", DisplayName = "UI_Update_FirstName_Contact")]
         [DataRow("Sam", "Ryal", "287498859", "Kent", "Female", "LastName", "Rayl", DisplayName = "UI_Update_LastName_Contact")]
         [DataRow("Alice", "Bob", "2483598", "New York", "Male", "ContactNo", "3824893", DisplayName = "UI_Update_ContactNo_Contact")]
-        [DataRow("Dave", "Pat", "58785006", "Portlan", "Female", "Address", "Orlando", DisplayName = "UI_Update_Address_Contact")]
+        [DataRow("Dave", "Pat", "58785006", "Portland", "Female", "Address", "Orlando", DisplayName = "UI_Update_Address_Contact")]
         [DataRow("George", "Joe", "387592386", "Dalls", "Male", "Gender", "Female", DisplayName = "UI_Update_Gender_Contact")]
         public void Verify_UI_Update_Contact
             (String FirstName, String LastName, String ContactNo, String Address, String Gender, String Field_to_update, String New_Value)
@@ -95,7 +95,10 @@ namespace UIAutomation
             Wait.UntilInputIsProcessed();
             Thread.Sleep(3000);
 
-            //Step 3: Fetch contact ID
+            //Step 3: Search contact ID
+            var searchBox = window.FindFirstDescendant(cf => cf.ByAutomationId("txtboxSearch")).AsTextBox();
+            searchBox.Enter(FirstName);
+
             DataTable dt = econtactcls.Search(FirstName);
             var contact_id = window.FindFirstDescendant(cf => cf.ByAutomationId("txtboxContactID")).AsTextBox();
             contact_id.Enter(dt.Rows[0]["ContactID"].ToString());

@@ -225,6 +225,7 @@ namespace Econtact
         {
             delete_Contact();
         }
+
         public void delete_Contact()
         {
             //Get the Contact ID fromt eh Application
@@ -245,22 +246,23 @@ namespace Econtact
             {
                 //FAiled to dElte
                 MessageBox.Show("Delete contact failed");
-               Console.WriteLine("Failed to Delete Dontact. Try Again.");
+               Console.WriteLine("Failed to Delete Contact. Try Again.");
             }
         }
         public void txtboxSearch_TextChanged(object sender, EventArgs e)
         {
             //Get teh value from text box
             string keyword = txtboxSearch.Text;
-            DataTable dt = new DataTable();
-            dt = Search(keyword);
-            dgvContactList.DataSource = dt;
+            Search(keyword);
+            
         }
+
         public DataTable Search(string keyword)
         {
             string sql = "SELECT * FROM tbl_contact WHERE FirstName LIKE '%" + keyword + "%' OR LastName LIKE '%" + keyword + "%' OR Address LIKE '%" + keyword + "%'";
             DataTable dt = new DataTable();
             dt = database.ExecuteQuery(sql, null);
+            dgvContactList.DataSource = dt;
             return dt;
         }
     }
