@@ -1,0 +1,22 @@
+name: Build and Test
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Set Up .NET
+        uses: actions/setup-dotnet@v5
+
+      - name: Run Build and Tests
+        run: |
+          chmod +x ./buildTestSuite.sh
+          ./buildTestSuite.sh
