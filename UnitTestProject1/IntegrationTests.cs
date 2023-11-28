@@ -137,7 +137,7 @@ namespace TestProject1
                 econtactcls.add_Contact();
 
                 //Step2: Search contact with any keyword in the database
-                DataTable dt = econtactcls.Search(New_Value);
+                DataTable dt = econtactcls.Search(FirstName);
 
                 //Validate contact exists.
                 Assert.IsNotNull(dt);

@@ -164,6 +164,9 @@ namespace UIAutomation
             Thread.Sleep(3000);
 
             //Step 3: Delete contact
+            var searchBox = window.FindFirstDescendant(cf => cf.ByAutomationId("txtboxSearch")).AsTextBox();
+            searchBox.Enter(FirstName);
+
             DataTable dt = econtactcls.Search(FirstName);
             var contact_id = window.FindFirstDescendant(cf => cf.ByAutomationId("txtboxContactID")).AsTextBox();
             contact_id.Enter(dt.Rows[0]["ContactID"].ToString());
@@ -253,6 +256,9 @@ namespace UIAutomation
             Thread.Sleep(3000);
 
             //Step 2: Fetch contact ID
+            var searchBox = window.FindFirstDescendant(cf => cf.ByAutomationId("txtboxSearch")).AsTextBox();
+            searchBox.Enter(FirstName);
+
             DataTable dt = econtactcls.Search(FirstName);
             var contact_id = window.FindFirstDescendant(cf => cf.ByAutomationId("txtboxContactID")).AsTextBox();
             contact_id.Enter(dt.Rows[0]["ContactID"].ToString());
@@ -275,10 +281,14 @@ namespace UIAutomation
             ok_button.Click();
             Thread.Sleep(3000);
 
+            searchBox.Enter("");
+
+            searchBox.Enter(LastName);
+            contact_id.Enter(dt.Rows[0]["ContactID"].ToString());
+
             //Step 4: Delete contact
             var delete_button = window.FindFirstDescendant(cf => cf.ByAutomationId("btnDelete")).AsButton();
             delete_button.Click();
-            Wait.UntilInputIsProcessed();
             Thread.Sleep(2000);
             ok_button = window.FindFirstDescendant(cf => cf.ByAutomationId("2")).AsButton();
             ok_button.Click();
@@ -293,6 +303,7 @@ namespace UIAutomation
             edit.Focus();
             Gender = "Female";
             Keyboard.Type(Gender);
+            Thread.Sleep(2000);
             var clear_button = window.FindFirstDescendant(cf => cf.ByAutomationId("btnClear")).AsButton();
             clear_button.Click();
             Wait.UntilInputIsProcessed();
