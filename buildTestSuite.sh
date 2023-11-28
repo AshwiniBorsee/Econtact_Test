@@ -2,7 +2,7 @@
 
 
 
-#read -p "Enter recipient email : " receiver
+read -p "Enter recipient email : " receiver
 
 echo "restoring packages"
 
@@ -34,11 +34,10 @@ else
 fi
 
 #modify email-id
-sender="$SENDER_EMAIL"
-receiver = "$RECIPIENT_EMAIL"
+sender="borse.ashwini1234@gmail.com"
 
 #add password
-gapp="$GMAIL_APP_PASSWORD"
+gapp=""
 
 body="Build Succeeded = $build_succeeded \n Tests Succeeded = $TEST_STATUS"          # storing the content of file in a variable
 
