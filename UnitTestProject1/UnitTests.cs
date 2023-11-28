@@ -25,13 +25,14 @@ namespace TestProject1
             /// <summary>
             // arrange
             var mockDatabase = new Mock<IDatabase>();
+            var mockMessageBoxService = new Mock<IMessageBoxService>();
             mockDatabase.Setup
                 (d => d.ExecuteNonQuery(It.IsAny<string>(), It.IsAny<SqlParameter[]>())).Returns(1);
 
             var contact = new contactClass(mockDatabase.Object);
 
             // act
-            Econtactcls econtactcls = new Econtactcls(contact);
+            Econtactcls econtactcls = new Econtactcls(contact, mockMessageBoxService.Object);
             econtactcls.txtboxFirstName.Text = FirstName;
             econtactcls.txtboxLastName.Text = LastName;
             econtactcls.txtBoxContactNumber.Text = ContactNo;
@@ -65,13 +66,15 @@ namespace TestProject1
             /// <summary>
             // arrange
             var mockDatabase = new Mock<IDatabase>();
+            var mockMessageBoxService = new Mock<IMessageBoxService>();
+
             mockDatabase.Setup
                 (d => d.ExecuteNonQuery(It.IsAny<string>(), It.IsAny<SqlParameter[]>())).Returns(0);
 
             var contact = new contactClass(mockDatabase.Object);
 
             // act
-            Econtactcls econtactcls = new Econtactcls(contact);
+            Econtactcls econtactcls = new Econtactcls(contact, mockMessageBoxService.Object);
             econtactcls.txtboxFirstName.Text = FirstName;
             econtactcls.txtboxLastName.Text = LastName;
             econtactcls.txtBoxContactNumber.Text = ContactNo;
@@ -114,12 +117,13 @@ namespace TestProject1
             
             // arrange
             var mockDatabase = new Mock<IDatabase>();
+            var mockMessageBoxService = new Mock<IMessageBoxService>();
             mockDatabase.Setup
                 (d => d.ExecuteNonQuery(It.IsAny<string>(), It.IsAny<SqlParameter[]>())).Returns(1);
 
             var contact = new contactClass(mockDatabase.Object);
 
-            Econtactcls econtactcls = new Econtactcls(contact);
+            Econtactcls econtactcls = new Econtactcls(contact, mockMessageBoxService.Object);
 
             econtactcls.txtboxFirstName.Text = FirstName;
             econtactcls.txtboxLastName.Text = LastName;
@@ -163,13 +167,14 @@ namespace TestProject1
 
             // arrange
             var mockDatabase = new Mock<IDatabase>();
+            var mockMessageBoxService = new Mock<IMessageBoxService>();
             mockDatabase.Setup
                 (d => d.ExecuteNonQuery(It.IsAny<string>(), It.IsAny<SqlParameter[]>())).Returns(1);
             mockDatabase.Setup
                 (d => d.ExecuteQuery(It.IsAny<string>(), It.IsAny<SqlParameter[]>())).Returns(new System.Data.DataTable());
             var contact = new contactClass(mockDatabase.Object);
 
-            Econtactcls econtactcls = new Econtactcls(contact);
+            Econtactcls econtactcls = new Econtactcls(contact, mockMessageBoxService.Object);
             econtactcls.txtboxFirstName.Text = FirstName;
             econtactcls.txtboxLastName.Text = LastName;
             econtactcls.txtBoxContactNumber.Text = ContactNo;
@@ -212,13 +217,14 @@ namespace TestProject1
 
             // arrange
             var mockDatabase = new Mock<IDatabase>();
+            var mockMessageBoxService = new Mock<IMessageBoxService>();
             mockDatabase.Setup
                 (d => d.ExecuteNonQuery(It.IsAny<string>(), It.IsAny<SqlParameter[]>())).Returns(0);
             mockDatabase.Setup
                 (d => d.ExecuteQuery(It.IsAny<string>(), It.IsAny<SqlParameter[]>())).Returns(new System.Data.DataTable());
             var contact = new contactClass(mockDatabase.Object);
 
-            Econtactcls econtactcls = new Econtactcls(contact);
+            Econtactcls econtactcls = new Econtactcls(contact, mockMessageBoxService.Object);
             econtactcls.txtboxFirstName.Text = FirstName;
             econtactcls.txtboxLastName.Text = LastName;
             econtactcls.txtBoxContactNumber.Text = ContactNo;
@@ -260,6 +266,7 @@ namespace TestProject1
 
             // arrange
             var mockDatabase = new Mock<IDatabase>();
+            var mockMessageBoxService = new Mock<IMessageBoxService>();
             mockDatabase.Setup
                 (d => d.ExecuteNonQuery(It.IsAny<string>(), It.IsAny<SqlParameter[]>())).Returns(1);
             mockDatabase.Setup
@@ -267,7 +274,7 @@ namespace TestProject1
 
             var contact = new contactClass(mockDatabase.Object);
 
-            Econtactcls econtactcls = new Econtactcls(contact);
+            Econtactcls econtactcls = new Econtactcls(contact, mockMessageBoxService.Object);
 
             econtactcls.txtboxFirstName.Text = FirstName;
             econtactcls.txtboxLastName.Text = LastName;
@@ -311,6 +318,7 @@ namespace TestProject1
 
             // arrange
             var mockDatabase = new Mock<IDatabase>();
+            var mockMessageBoxService = new Mock<IMessageBoxService>();
             mockDatabase.Setup
                 (d => d.ExecuteNonQuery(It.IsAny<string>(), It.IsAny<SqlParameter[]>())).Returns(1);
             mockDatabase.Setup
@@ -318,7 +326,7 @@ namespace TestProject1
 
             var contact = new contactClass(mockDatabase.Object);
 
-            Econtactcls econtactcls = new Econtactcls(contact);
+            Econtactcls econtactcls = new Econtactcls(contact, mockMessageBoxService.Object);
 
             econtactcls.txtboxFirstName.Text = FirstName;
             econtactcls.txtboxLastName.Text = LastName;
@@ -363,13 +371,14 @@ namespace TestProject1
 
             // arrange
             var mockDatabase = new Mock<IDatabase>();
+            var mockMessageBoxService = new Mock<IMessageBoxService>();
             mockDatabase.Setup
                 (d => d.ExecuteNonQuery(It.IsAny<string>(), It.IsAny<SqlParameter[]>())).Returns(1);
             mockDatabase.Setup
                 (d => d.ExecuteQuery(It.IsAny<string>(), It.IsAny<SqlParameter[]>())).Returns(new System.Data.DataTable());
             var contact = new contactClass(mockDatabase.Object);
 
-            Econtactcls econtactcls = new Econtactcls(contact);
+            Econtactcls econtactcls = new Econtactcls(contact, mockMessageBoxService.Object);
             econtactcls.txtboxFirstName.Text = FirstName;
             econtactcls.txtboxLastName.Text = LastName;
             econtactcls.txtBoxContactNumber.Text = ContactNo;
@@ -406,13 +415,14 @@ namespace TestProject1
 
             // arrange
             var mockDatabase = new Mock<IDatabase>();
+            var mockMessageBoxService = new Mock<IMessageBoxService>();
             mockDatabase.Setup
                 (d => d.ExecuteNonQuery(It.IsAny<string>(), It.IsAny<SqlParameter[]>())).Returns(0);
             mockDatabase.Setup
                 (d => d.ExecuteQuery(It.IsAny<string>(), It.IsAny<SqlParameter[]>())).Returns(new System.Data.DataTable());
             var contact = new contactClass(mockDatabase.Object);
 
-            Econtactcls econtactcls = new Econtactcls(contact);
+            Econtactcls econtactcls = new Econtactcls(contact, mockMessageBoxService.Object);
             econtactcls.txtboxFirstName.Text = FirstName;
             econtactcls.txtboxLastName.Text = LastName;
             econtactcls.txtBoxContactNumber.Text = ContactNo;
@@ -450,6 +460,7 @@ namespace TestProject1
 
             // arrange
             var mockDatabase = new Mock<IDatabase>();
+            var mockMessageBoxService = new Mock<IMessageBoxService>();
             mockDatabase.Setup
                 (d => d.ExecuteNonQuery(It.IsAny<string>(), It.IsAny<SqlParameter[]>())).Returns(1);
             mockDatabase.Setup
@@ -457,7 +468,7 @@ namespace TestProject1
 
             var contact = new contactClass(mockDatabase.Object);
 
-            Econtactcls econtactcls = new Econtactcls(contact);
+            Econtactcls econtactcls = new Econtactcls(contact, mockMessageBoxService.Object);
 
             econtactcls.txtboxFirstName.Text = FirstName;
             econtactcls.txtboxLastName.Text = LastName;
@@ -497,6 +508,7 @@ namespace TestProject1
 
             // arrange
             var mockDatabase = new Mock<IDatabase>();
+            var mockMessageBoxService = new Mock<IMessageBoxService>();
             mockDatabase.Setup
                 (d => d.ExecuteNonQuery(It.IsAny<string>(), It.IsAny<SqlParameter[]>())).Returns(1);
             mockDatabase.Setup
@@ -504,7 +516,7 @@ namespace TestProject1
 
             var contact = new contactClass(mockDatabase.Object);
 
-            Econtactcls econtactcls = new Econtactcls(contact);
+            Econtactcls econtactcls = new Econtactcls(contact, mockMessageBoxService.Object);
             econtactcls.txtboxFirstName.Text = FirstName;
             econtactcls.txtboxLastName.Text = LastName;
             econtactcls.txtBoxContactNumber.Text = ContactNo;
@@ -547,6 +559,7 @@ namespace TestProject1
 
             // arrange
             var mockDatabase = new Mock<IDatabase>();
+            var mockMessageBoxService = new Mock<IMessageBoxService>();
             mockDatabase.Setup
                 (d => d.ExecuteNonQuery(It.IsAny<string>(), It.IsAny<SqlParameter[]>())).Returns(1);
             mockDatabase.Setup
@@ -554,7 +567,7 @@ namespace TestProject1
 
             var contact = new contactClass(mockDatabase.Object);
 
-            Econtactcls econtactcls = new Econtactcls(contact);
+            Econtactcls econtactcls = new Econtactcls(contact, mockMessageBoxService.Object);
             econtactcls.txtboxFirstName.Text = FirstName;
             econtactcls.txtboxLastName.Text = LastName;
             econtactcls.txtBoxContactNumber.Text = ContactNo;
@@ -588,9 +601,10 @@ namespace TestProject1
 
             // arrange
             var mockDatabase = new Mock<IDatabase>();
+  
             mockDatabase.Setup
                 (d => d.ExecuteNonQuery(It.IsAny<string>(), It.IsAny<SqlParameter[]>())).Returns(1);
-            var contact = new contactClass(mockDatabase.Object);
+            var contact = new contactClass(mockDatabase.Object );
             contact.FirstName = FirstName;
             contact.LastName = LastName;
             contact.Address = Address;
@@ -622,6 +636,7 @@ namespace TestProject1
 
             // arrange
             var mockDatabase = new Mock<IDatabase>();
+            
             var contact = new contactClass(mockDatabase.Object);
             contact.FirstName = FirstName;
             contact.LastName = LastName;
@@ -660,6 +675,7 @@ namespace TestProject1
 
             // arrange
             var mockDatabase = new Mock<IDatabase>();
+            
             mockDatabase.Setup
                 (d => d.ExecuteNonQuery(It.IsAny<string>(), It.IsAny<SqlParameter[]>())).Returns(1);
             var contact = new contactClass(mockDatabase.Object);
@@ -695,6 +711,7 @@ namespace TestProject1
 
             // arrange
             var mockDatabase = new Mock<IDatabase>();
+            
             var contact = new contactClass(mockDatabase.Object);
             contact.FirstName = FirstName;
             contact.LastName = LastName;
@@ -734,6 +751,7 @@ namespace TestProject1
 
             // arrange
             var mockDatabase = new Mock<IDatabase>();
+            
             mockDatabase.Setup
                 (d => d.ExecuteNonQuery(It.IsAny<string>(), It.IsAny<SqlParameter[]>())).Returns(1);
             var contact = new contactClass(mockDatabase.Object);
@@ -769,6 +787,7 @@ namespace TestProject1
 
             // arrange
             var mockDatabase = new Mock<IDatabase>();
+            
             var contact = new contactClass(mockDatabase.Object);
             contact.FirstName = FirstName;
             contact.LastName = LastName;

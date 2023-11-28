@@ -27,7 +27,8 @@ namespace TestProject1
             try
             {
                 // act
-                Econtactcls econtactcls = new Econtactcls();
+                var mockMessageBoxService = new Mock<IMessageBoxService>();
+                Econtactcls econtactcls = new Econtactcls(mockMessageBoxService.Object);
                 econtactcls.txtboxFirstName.Text = FirstName;
                 econtactcls.txtboxLastName.Text = LastName;
                 econtactcls.txtBoxContactNumber.Text = ContactNo;
@@ -72,8 +73,9 @@ namespace TestProject1
             /// <summary>
             // arrange
             try {
-            // act
-                Econtactcls econtactcls = new Econtactcls();
+                // act
+                var mockMessageBoxService = new Mock<IMessageBoxService>();
+                Econtactcls econtactcls = new Econtactcls(mockMessageBoxService.Object);
                 econtactcls.txtboxFirstName.Text = FirstName;
                 econtactcls.txtboxLastName.Text = LastName;
                 econtactcls.txtBoxContactNumber.Text = ContactNo;
@@ -126,7 +128,8 @@ namespace TestProject1
             try
             {
                 // act
-                Econtactcls econtactcls = new Econtactcls();
+                var mockMessageBoxService = new Mock<IMessageBoxService>();
+                Econtactcls econtactcls = new Econtactcls(mockMessageBoxService.Object);
                 econtactcls.txtboxFirstName.Text = FirstName;
                 econtactcls.txtboxLastName.Text = LastName;
                 econtactcls.txtBoxContactNumber.Text = ContactNo;
@@ -182,7 +185,8 @@ namespace TestProject1
             try
             {
                 // act
-                Econtactcls econtactcls = new Econtactcls();
+                var mockMessageBoxService = new Mock<IMessageBoxService>();
+                Econtactcls econtactcls = new Econtactcls(mockMessageBoxService.Object);
                 econtactcls.txtboxFirstName.Text = FirstName;
                 econtactcls.txtboxLastName.Text = LastName;
                 econtactcls.txtBoxContactNumber.Text = ContactNo;
@@ -203,7 +207,7 @@ namespace TestProject1
                 econtactcls.txtboxContactID.Text = dt.Rows[0]["ContactID"].ToString();
                 econtactcls.delete_Contact();
                 //Validate delete data.
-                DataTable dt1 = econtactcls.Search(FirstName);
+                DataTable dt1 = econtactcls.Search(dt.Rows[0]["ContactID"].ToString());
                 Assert.IsTrue(dt1.Rows.Count == 0);
                 Console.WriteLine("Contact deleted successfully");
             }
@@ -233,7 +237,8 @@ namespace TestProject1
             try
             {
                 // act
-                Econtactcls econtactcls = new Econtactcls();
+                var mockMessageBoxService = new Mock<IMessageBoxService>();
+                Econtactcls econtactcls = new Econtactcls(mockMessageBoxService.Object);
 
                 //Step2: Search contact with any keyword in the database
                 DataTable dt = econtactcls.Search(FirstName);
@@ -269,7 +274,8 @@ namespace TestProject1
             try
             {
                 // act
-                Econtactcls econtactcls = new Econtactcls();
+                var mockMessageBoxService = new Mock<IMessageBoxService>();
+                Econtactcls econtactcls = new Econtactcls(mockMessageBoxService.Object);
 
                 //Step2: Search contact with any keyword in the database
                 DataTable dt = econtactcls.Search(FirstName);
@@ -315,7 +321,8 @@ namespace TestProject1
             try
             {
                 // act
-                Econtactcls econtactcls = new Econtactcls();
+                var mockMessageBoxService = new Mock<IMessageBoxService>();
+                Econtactcls econtactcls = new Econtactcls(mockMessageBoxService.Object);
               
                 //Step2: Search contact with any keyword in the database
                 DataTable dt = econtactcls.Search(FirstName);

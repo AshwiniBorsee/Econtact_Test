@@ -5,6 +5,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace Econtact
 {
@@ -53,4 +54,13 @@ namespace Econtact
             }
         }
     }
+
+    public class MessageBoxService : IMessageBoxService
+    {
+        public void Show(string message)
+        {
+            MessageBox.Show(message);
+        }
+    }
+
 }

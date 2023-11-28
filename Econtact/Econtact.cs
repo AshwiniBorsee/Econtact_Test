@@ -16,23 +16,36 @@ namespace Econtact
 {
     public partial class Econtactcls : Form
     {
-        static string connectionString; //ConfigurationManager.ConnectionStrings["connstrng"].ConnectionString;
-        // Create an instance of SqlDatabase, passing the connection string
-        static IDatabase database; //= new SqlDatabase(connectionString);
+        static string connectionString; 
+        static IDatabase database; 
+        private readonly IMessageBoxService messageBoxService;
 
         // Create an instance of contactClass, passing the database instance
-        contactClass c;// = new contactClass(database);
+        contactClass c;
 
         public Econtactcls()
         {
+            messageBoxService = new MessageBoxService();
             connectionString = ConfigurationManager.ConnectionStrings["connstrng"].ConnectionString;
             database = new SqlDatabase(connectionString);
             c = new contactClass(database);
             InitializeComponent();
 
         }
-        public Econtactcls(contactClass c)
+
+        public Econtactcls(IMessageBoxService message)
         {
+            this.messageBoxService = message;
+            connectionString = ConfigurationManager.ConnectionStrings["connstrng"].ConnectionString;
+            database = new SqlDatabase(connectionString);
+            c = new contactClass(database);
+            InitializeComponent();
+
+        }
+
+        public Econtactcls(contactClass c, IMessageBoxService message)
+        {
+            this.messageBoxService = message;
             this.c = c;
             InitializeComponent();
         }
@@ -95,14 +108,14 @@ namespace Econtact
             if(success==true)
             {
                 //Successfully Inserted
-               MessageBox.Show("New Contact Successfully Inserted");
+               messageBoxService.Show("New Contact Successfully Inserted");
                 //Call the Clear Method Here
                 Clear();
             }
             else
             {
                 //FAiled to Add Contact
-                MessageBox.Show("Add contact failed");
+                messageBoxService.Show("Add contact failed");
                 Console.WriteLine("Error: Failed to add New Contact. Try Again.");
             }
             //Load Data on Data GRidview
@@ -187,7 +200,7 @@ namespace Econtact
             if(success==true)
             {
                 //Updated Successfully
-               MessageBox.Show("Contact has been successfully Updated.");
+               messageBoxService.Show("Contact has been successfully Updated.");
                 //Load Data on Data GRidview
                 DataTable dt = c.Select();
                 dgvContactList.DataSource = dt;
@@ -197,7 +210,7 @@ namespace Econtact
             else
             {
                 //Failed to Update
-                MessageBox.Show("Update Contact Failed");
+                messageBoxService.Show("Update Contact Failed");
                Console.WriteLine("Error: Failed to Update Contact.Try Again.");
             }
         }
@@ -234,7 +247,7 @@ namespace Econtact
             if(success==true)
             {
                 //Successfully Deleted
-               MessageBox.Show("Contact successfully deleted.");
+               messageBoxService.Show("Contact successfully deleted.");
                 //Refresh Data GridView
                 //Load Data on Data GRidview
                 DataTable dt = c.Select();
@@ -245,7 +258,7 @@ namespace Econtact
             else
             {
                 //FAiled to dElte
-                MessageBox.Show("Delete contact failed");
+                messageBoxService.Show("Delete contact failed");
                Console.WriteLine("Failed to Delete Contact. Try Again.");
             }
         }

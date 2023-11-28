@@ -295,6 +295,8 @@ namespace UIAutomation
             Wait.UntilInputIsProcessed();
             Thread.Sleep(3000);
 
+            searchBox.Enter("");
+
             //Step 5: Clear contact
             first_name.Enter(FirstName);
             last_name.Enter(LastName);
@@ -311,6 +313,23 @@ namespace UIAutomation
 
             //Step 6: close the application
             app.Close();
+
+        }
+
+        [TestMethod]
+        public void Verify_pictureBox_click()
+        {
+            //Step 1: Launch the application
+            Econtactcls econtactcls = new Econtactcls();
+            Application app = StartApplication();
+            UIA3Automation automation = new UIA3Automation();
+            var window = app.GetMainWindow(automation);
+            
+            Thread.Sleep(2000);
+
+            var close_button = window.FindFirstDescendant(cf => cf.ByAutomationId("pictureBox1")).AsButton();
+            close_button.Click();
+
 
         }
 

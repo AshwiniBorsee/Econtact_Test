@@ -13,4 +13,8 @@ namespace Econtact
         DataTable ExecuteQuery(string sql, SqlParameter[] parameters);
         int ExecuteNonQuery(string sql, SqlParameter[] parameters);
     }
+    public interface IMessageBoxService
+    {
+        void Show(string message);
+    }
 }
