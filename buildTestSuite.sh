@@ -1,8 +1,8 @@
 #!usr/bin/env bash
-# rgggunoqshakkufe
 
 
-read -p "Enter recipient email : " receiver
+
+#read -p "Enter recipient email : " receiver
 
 echo "restoring packages"
 
@@ -33,9 +33,12 @@ else
     TEST_STATUS=false
 fi
 
-sender="chenyushu836@gmail.com"
+#modify email-id
+sender="$SENDER_EMAIL"
+receiver = "$RECIPIENT_EMAIL"
 
-gapp=""
+#add password
+gapp="$GMAIL_APP_PASSWORD"
 
 body="Build Succeeded = $build_succeeded \n Tests Succeeded = $TEST_STATUS"          # storing the content of file in a variable
 
