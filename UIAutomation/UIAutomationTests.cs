@@ -223,7 +223,7 @@ namespace UIAutomation
         }
 
         [TestMethod]
-        [DataRow("Kiara", "Rao", "78648626", "Maldives", "Male")]
+        [DataRow("Chris", "Tate", "83782758", "Seattle", "Male")]
         public void Verify_UI_Contact(String FirstName, String LastName, String ContactNo, String Address, String Gender)
         {
             //Step 1: Launch the application
